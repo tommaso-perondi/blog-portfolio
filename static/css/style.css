@@ -25,6 +25,10 @@ body {
   margin-bottom: 20px;
 }
 
+#navbar {
+  margin-bottom: 20px;
+}
+
 .nav-inner {
   display: inline-block;
   margin-top: 0px;
