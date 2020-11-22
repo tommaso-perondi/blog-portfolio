@@ -1,0 +1,12 @@
+#home {
+  width: 100%;
+}
+
+#profile-pic {
+  display: inline-block;
+}
+
+#description {
+  display: inline-block;
+  vertical-align: middle;
+}

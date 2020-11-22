@@ -4,7 +4,7 @@
         <!-- includes-->
         <link rel="preconnect" href="https://fonts.gstatic.com">
         <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap" rel="stylesheet">
-        <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css')}}">
+        <link rel="stylesheet" href="{{ url_for('main_bp.static', filename='css/style.css')}}">
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         {%block head%}
@@ -17,7 +17,7 @@
                 <p class='title'>Tommaso Perondi</p>
             </div>
             <!--NAVBAR-->
-            <div>
+            <div id="navbar">
                 <div class="nav-inner"><button class='nav-btn' >Home</button></div>
                 <div class="nav-inner"><button class='nav-btn' >Blog</button></div>
                 <div class="nav-inner"><button class='nav-btn' >About</button></div>
