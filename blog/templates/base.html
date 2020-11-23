@@ -18,9 +18,9 @@
             </div>
             <!--NAVBAR-->
             <div id="navbar">
-                <div class="nav-inner"><button class='nav-btn' >Home</button></div>
-                <div class="nav-inner"><button class='nav-btn' >Blog</button></div>
-                <div class="nav-inner"><button class='nav-btn' >About</button></div>
+                <div class="nav-inner"><button class='nav-btn' onclick="location.href ='{{ url_for('main_bp.home')}}';">Home</button></div>
+                <div class="nav-inner"><button class='nav-btn' onclick="location.href ='{{ url_for('main_bp.blog')}}';">Blog</button></div>
+                <div class="nav-inner"><button class='nav-btn' onclick="location.href ='{{ url_for('main_bp.about')}}';">About</button></div>
             </div>
             {% block content %}
             {% endblock %}

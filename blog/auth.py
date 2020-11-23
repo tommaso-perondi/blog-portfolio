@@ -6,35 +6,34 @@ from . import login_manager
 import sys
 
 auth_bp = Blueprint(
-    'auth_bp',__name__,
-    template_folder='templates',
-    static_folder='static'
+    "auth_bp", __name__, template_folder="templates", static_folder="static"
 )
 
-@auth_bp.route('/login', methods=['GET', 'POST'])
+
+@auth_bp.route("/login", methods=["GET", "POST"])
 def login():
-    
+
     if current_user.is_authenticated:
         return redirect(url_for(main_bp.dashboard))
 
     form = LoginForm()
 
-    
     if form.validate_on_submit():
         user = User.query.filter_by(email=form.email.data).first()
         if user and user.check_password_hash(form.password.data):
             login_user(user)
-            next_page = request.args.get('next')
-            return redirect(next_page or url_for('main_bp.dashboard'))
-        flash('Invalid username/password combination')
-        return redirect(url_for('auth_bp.login'))
+            next_page = request.args.get("next")
+            return redirect(next_page or url_for("main_bp.dashboard"))
+        flash("Invalid username/password combination")
+        return redirect(url_for("auth_bp.login"))
     return render_template(
-        'login.html',
+        "login.html",
         form=form,
-        title='Log in.',
-        template='login-page',
-        body="Log in with your User account."
+        title="Log in.",
+        template="login-page",
+        body="Log in with your User account.",
     )
+
 
 @login_manager.user_loader
 def load_user(user_id):
@@ -47,5 +46,5 @@ def load_user(user_id):
 @login_manager.unauthorized_handler
 def unauthorized():
     """Redirect unauthorized users to Login page."""
-    flash('You must be logged in to view that page.')
-    return redirect(url_for('auth_bp.login'))
+    flash("You must be logged in to view that page.")
+    return redirect(url_for("auth_bp.login"))

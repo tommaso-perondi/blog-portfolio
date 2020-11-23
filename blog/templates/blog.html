@@ -5,11 +5,15 @@
 
 {% block content %}
                 <!--POST-->
-                <div>
-                    <div class='post-title'>Test test test</div>
-                    <div class='post-date'> 17 Novembre</div>
-                    <div class='post-content'>Test test test test test</div>
-                    <div class='post-author'>Tommaso Perondi</div>
-                </div>
-            <!--POST-->
+    {% for post in posts %}
+        <div>
+            <div class='post-title'><a href="">{{ post['title'] }}</a></div>
+            <div class='post-date'> {{ post['created_on'] }}</div>
+            <div class='post-content'>{{ post['content'] }}</div>
+            <div class='post-author'>{{ post['name'] }}</div>
+        </div>
+        {% if not loop.last %}
+            <hr>
+        {% endif %}
+    {% endfor %}
 {%endblock%}
