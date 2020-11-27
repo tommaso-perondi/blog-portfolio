@@ -1,8 +1,35 @@
 {% extends'base.html' %}
 
 {%block head%}
+    <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
 {%endblock%}
 
 {% block content %}
     Admin dashboard
+
+    {% for post in posts %}
+    <div style="border-bottom: 1px solid #2B2B2C;">
+        <div class='post-title'><a href="">{{ post['title'] }}</a></div>
+        <div class='post-date'> {{ post['created_on'] }}</div>
+        <div class='post-content'>{{ post['content'] }}</div>
+        <div class='post-author'>{{ post['name'] }}</div>
+        <button action="submit" id="delete_button{{ post['id']}}">Delete</button>
+            <script>
+                $("#delete_button{{ post['id']}}").on('click', function(){
+                    $.ajax({
+                        url: "/posts/{{post['id']}}/delete", // form action url
+                        type: 'get', // form submit method get/post
+                        dataType: 'html', // request type html/json/xml 
+                        success: function() {   
+                            location.reload();  
+                        }
+                    });
+
+                });
+            </script>
+        </div>
+    {% if not loop.last %}
+        <hr>
+    {% endif %}
+{% endfor %}
 {% endblock %}
