@@ -2,6 +2,9 @@
 
 {%block head%}
     <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@editorjs/editorjs@latest"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@editorjs/code@latest"></script>
+    <script src="{{ url_for('main_bp.static', filename='js/edjsHTML.js') }}"></script>
 {%endblock%}
 
 {% block content %}
@@ -17,12 +20,12 @@
     
         <h1>Create post</h1>
     
-        <form method="POST" action="/posts/create">
+        <form method="POST" action="/posts/create" onsubmit="saveEditorData()">
           {{ form.csrf_token }}
     
           <fieldset class="title">
             {{ form.title.label }}
-            {{ form.title(placeholder='Tittolo post') }}
+            {{ form.title(placeholder='Titolo post') }}
             {% if form.title.errors %}
               <ul class="errors">
                 {% for error in form.title.errors %}
@@ -33,7 +36,10 @@
     
           <fieldset class="content">
             {{ form.content.label }}
-            {{ form.content }}
+            {{ form.content(style="display:none")}}
+            <div id="editorjs">
+
+            </div>
             {% if form.content.errors %}
               <ul class="errors">
                 {% for error in form.content.errors %}
@@ -45,9 +51,29 @@
           <div class="submit-button">
             {{ form.submit }}
           </div>
-    
         </form>
+
       </div>
 
-    
+      <script>
+
+        const editor = new EditorJS({ 
+          holder: 'editorjs', 
+          tools: { 
+            code: CodeTool,
+          }, 
+        })
+
+        const edjsParser = edjsHTML();
+
+        function saveEditorData(){
+          editor.save().then((outputData) => {
+            let html = edjsParser.parse(outputData).join(" ");
+            content.value = html
+          }).catch((error) => {
+            console.log('Saving failed: ', error)
+          });
+        }
+
+      </script> 
 {% endblock %}

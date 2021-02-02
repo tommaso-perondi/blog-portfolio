@@ -11,7 +11,7 @@
     <div style="border-bottom: 1px solid #2B2B2C;">
         <div class='post-title'><a href="">{{ post['title'] }}</a></div>
         <div class='post-date'> {{ post['created_on'] }}</div>
-        <div class='post-content'>{{ post['content'] }}</div>
+        <div class='post-content'>{{ post['content']|safe }}</div>
         <div class='post-author'>{{ post['name'] }}</div>
         <button class="nav-btn" action="submit" id="delete_button{{ post['id']}}">Delete</button>
             <script>

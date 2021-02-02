@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 
 {%block head%}
+    <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
 {%endblock%}
 
 {% block content %}
@@ -9,11 +10,15 @@
         <div>
             <div class='post-title'><a href="">{{ post['title'] }}</a></div>
             <div class='post-date'> {{ post['created_on'] }}</div>
-            <div class='post-content'>{{ post['content'] }}</div>
+            
+            <div class='post-content' id="content">
+                {{ post['content']|safe }}
+            </div>
             <div class='post-author'>{{ post['name'] }}</div>
         </div>
         {% if not loop.last %}
             <hr>
         {% endif %}
     {% endfor %}
+
 {%endblock%}
