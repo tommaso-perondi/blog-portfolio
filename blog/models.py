@@ -10,7 +10,7 @@ from . import db
 
 class User(UserMixin, db.Model):
 
-    __tablename__ = "flask-users"
+    __tablename__ = "user"
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(50), nullable=False, unique=False)
     username = db.String(20)
@@ -18,6 +18,7 @@ class User(UserMixin, db.Model):
     password = db.Column(
         db.String(200), primary_key=False, unique=False, nullable=False
     )
+    posts = db.relationship("Post", backref="author")
 
     def set_password(self, password):
         self.password = generate_password_hash(password, method="sha256")
@@ -35,11 +36,11 @@ class User(UserMixin, db.Model):
 
 class Post(db.Model):
 
-    __tablename__ = "blog-post"
+    __tablename__ = "post"
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(100), unique=True, nullable=False)
     content = db.Column(db.Text, unique=False, nullable=False)
-    author_id = db.Column(db.ForeignKey("flask-users.id"))
+    author_id = db.Column(db.Integer, db.ForeignKey("user.id"))
     time_created = db.Column(db.DateTime(timezone=True), server_default=func.now())
     time_updated = db.Column(db.DateTime(timezone=True), onupdate=func.now())
 

@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, redirect, url_for, Response
+from flask import Blueprint, render_template, redirect, url_for, Response, request
 from flask_login import current_user, login_required, logout_user
 from .models import Post
 from .forms import PostCreate
@@ -30,9 +30,9 @@ def dashboard():
 def create_post():
 
     form = PostCreate()
-
+    user = current_user
     if form.validate_on_submit():
-        db.session.add(Post(title=form.title.data, content=form.content.data))
+        db.session.add(Post(title=form.title.data, content=form.content.data, author_id=user.id))
         db.session.commit()
         
     return render_template(
@@ -67,7 +67,21 @@ def home():
 def blog():
     return render_template("blog.html", posts=Post.query.order_by(Post.time_created.desc()).all())
 
+@main_bp.route("/posts/<post_id>")
+def view_post(post_id):
+    return render_template("post.html", post=Post.query.filter_by(id=post_id).first_or_404())
+
 
 @main_bp.route("/about", methods=["GET"])
 def about():
     return render_template("about.html")
+
+
+def loggedUser():
+	user = None
+	cookie = request.cookies.get('user_id')
+	if cookie:
+		cookie_value = check_secure_val(cookie)
+		if cookie_value:
+			user = models.User.query.filter_by(id = cookie_value).one()
+	return user

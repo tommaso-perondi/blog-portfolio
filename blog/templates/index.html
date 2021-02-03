@@ -1,17 +1,18 @@
 {% extends 'base.html' %}
 
 {% block head%}
-    <link rel="stylesheet" href="{{ url_for('main_bp.static', filename='css/grid/simple-grid.css')}}">
+    <link rel="stylesheet" href="{{ url_for('main_bp.static', filename='css/flexboxgrid.min.css')}}">
+    
     <link rel="stylesheet" href="{{ url_for('main_bp.static', filename='css/index.css')}}">
 {% endblock %}
 
 {% block content %}
 <div class="container" id="home">
     <div class="row">
-        <div class="col-2">
+        <div class="col-md-2">
             <img id="profile-pic" src="https://dummyimage.com/100x125/000/fff.png" >
         </div>
-        <div id="description" class="col-10">
+        <div id="description" class="col-md-10">
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi in elit laoreet, sollicitudin nisi vel, lobortis velit. Proin accumsan ligula orci, ac pharetra ante ultrices vestibulum. Curabitur sed magna dapibus, dapibus massa non, pretium ex. Maecenas ultricies sollicitudin enim, et congue nisl interdum sit amet. Proin eleifend elit vel sapien placerat blandit. Vivamus nec faucibus orci, quis ullamcorper turpis. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec pellentesque euismod eros quis blandit. Ut ut nulla interdum, laoreet nibh id, ultricies tellus. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae;
         </div>
     </div>

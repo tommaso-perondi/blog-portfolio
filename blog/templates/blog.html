@@ -8,13 +8,13 @@
                 <!--POST-->
     {% for post in posts %}
         <div>
-            <div class='post-title'><a href="">{{ post['title'] }}</a></div>
+            <div class='post-title'><a href="/posts/{{post.id}}">{{ post['title'] }} {{ post.id }}</a></div>
             <div class='post-date'> {{ post['created_on'] }}</div>
             
             <div class='post-content' id="content">
-                {{ post['content']|safe }}
+                {{ post['content']|truncate(200)|safe }}
             </div>
-            <div class='post-author'>{{ post['name'] }}</div>
+            <div class='post-author'>{{ post.author.name }}</div>
         </div>
         {% if not loop.last %}
             <hr>
