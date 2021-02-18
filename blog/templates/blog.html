@@ -6,6 +6,7 @@
 
 {% block content %}
                 <!--POST-->
+
     {% for post in posts %}
         <div>
             <div class='post-title'><a href="/posts/{{post.id}}">{{ post['title'] }} {{ post.id }}</a></div>

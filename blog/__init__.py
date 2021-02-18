@@ -1,3 +1,4 @@
+
 import os
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
@@ -15,17 +16,15 @@ def create_app():
     db.init_app(app)
     login_manager.init_app(app)
     with app.app_context():
-        from . import routes
-        from . import auth
-
+        from blog import routes
+        from blog.auth import routes as auth_routes, commands as auth_commands
+        from blog.errors.handlers import errors
         # Register Blueprints
-        app.register_blueprint(routes.main_bp)
-        app.register_blueprint(auth.auth_bp)
-        app.register_blueprint(commands.usersbp)
+        app.register_blueprint(routes.main)
+        app.register_blueprint(auth_routes.auth)
+        app.register_blueprint(auth_commands.usersbp)
+        app.register_blueprint(errors)
         # Create Database Models
         db.create_all()
 
         return app
-
-
-from .commands import usersbp

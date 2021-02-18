@@ -4,7 +4,7 @@
         <!-- includes-->
         <link rel="preconnect" href="https://fonts.gstatic.com">
         <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap" rel="stylesheet">
-        <link rel="stylesheet" href="{{ url_for('main_bp.static', filename='css/style.css')}}">
+        <link rel="stylesheet" href="{{ url_for('main.static', filename='css/style.css')}}">
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         {%block head%}
@@ -18,11 +18,11 @@
             </div>
             <!--NAVBAR-->
             <div id="navbar">
-                <div class="nav-inner"><button class='nav-btn' onclick="location.href ='{{ url_for('main_bp.home')}}';">Home</button></div>
-                <div class="nav-inner"><button class='nav-btn' onclick="location.href ='{{ url_for('main_bp.blog')}}';">Blog</button></div>
-                <div class="nav-inner"><button class='nav-btn' onclick="location.href ='{{ url_for('main_bp.about')}}';">About</button></div>
+                <div class="nav-inner"><button class='nav-btn' onclick="location.href ='{{ url_for('main.home')}}';">Home</button></div>
+                <div class="nav-inner"><button class='nav-btn' onclick="location.href ='{{ url_for('main.blog')}}';">Blog</button></div>
+                <div class="nav-inner"><button class='nav-btn' onclick="location.href ='{{ url_for('main.about')}}';">About</button></div>
                 {% if current_user.is_authenticated %}
-                    <div class="nav-inner"><button class='nav-btn' onclick="location.href ='{{ url_for('main_bp.dashboard')}}';">Admin</button></div>
+                    <div class="nav-inner"><button class='nav-btn' onclick="location.href ='{{ url_for('main.dashboard')}}';">Admin</button></div>
                 {% endif %}
             </div>
             {% block content %}

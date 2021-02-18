@@ -6,7 +6,7 @@
 
 {% block content %}
     Admin dashboard
-    <div class="nav-inner"><button class='nav-btn' onclick="location.href ='{{ url_for('main_bp.create_post')}}';">Create Post</button></div>
+    <div class="nav-inner"><button class='nav-btn' onclick="location.href ='{{ url_for('main.create_post')}}';">Create Post</button></div>
     {% for post in posts %}
     <div style="border-bottom: 1px solid #2B2B2C;">
         <div class='post-title'><a href="">{{ post['title'] }}</a></div>
