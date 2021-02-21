@@ -1,8 +1,14 @@
 
 import os
+import sys
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager
+from sqlalchemy import inspect
+
+
+import logging
+logging.basicConfig(level=logging.DEBUG)
 
 db = SQLAlchemy()
 login_manager = LoginManager()
@@ -10,10 +16,10 @@ login_manager = LoginManager()
 
 def create_app():
     app = Flask(__name__, instance_relative_config=False)
-
     app.config.from_object("config.Config")
-
     db.init_app(app)
+    engine = db.get_engine(app)
+    inspector = inspect(engine)
     login_manager.init_app(app)
     with app.app_context():
         from blog import routes
@@ -25,6 +31,7 @@ def create_app():
         app.register_blueprint(auth_commands.usersbp)
         app.register_blueprint(errors)
         # Create Database Models
-        db.create_all(checkfirst=True)
+        if inspector.get_table_names() == []:
+            db.create_all()
 
         return app
