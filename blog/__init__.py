@@ -25,6 +25,6 @@ def create_app():
         app.register_blueprint(auth_commands.usersbp)
         app.register_blueprint(errors)
         # Create Database Models
-        db.create_all()
+        db.create_all(checkfirst=True)
 
         return app
