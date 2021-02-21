@@ -4,7 +4,7 @@ from blog.auth.models import User
 from auth import db
 
 
-usersbp = Blueprint("users", __name__)
+usersbp = Blueprint("users", __name__,)
 
 
 @usersbp.cli.command("create")

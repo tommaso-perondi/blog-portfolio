@@ -1,6 +1,8 @@
 from flask import Blueprint, render_template
+from auth import parentdir
+import os
 
-errors = Blueprint('errors', __name__)
+errors = Blueprint('errors', __name__, template_folder=os.path.join(parentdir,"templates/errors"))
 
 
 @errors.app_errorhandler(404)

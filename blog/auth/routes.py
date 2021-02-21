@@ -2,11 +2,11 @@ from flask import Blueprint, redirect, render_template, flash, request, session,
 from flask_login import login_required, logout_user, current_user, login_user
 from .forms import LoginForm
 from .models import User
-from auth import login_manager, main
-import sys
+from auth import login_manager, main, parentdir
+import sys, os
 
 auth = Blueprint(
-    "auth", __name__, template_folder="templates", static_folder="static"
+    "auth", __name__, template_folder=os.path.join(parentdir,"templates/auth"), static_folder="static"
 )
 
 

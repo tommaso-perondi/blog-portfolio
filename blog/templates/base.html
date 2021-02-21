@@ -14,11 +14,10 @@
     <body>
         <div id='center-div'>
             <div id='header'>
-                <p class='title'>Tommaso Perondi</p>
+                <p class='title'><a style="color: inherit; text-decoration: none;"href="{{ url_for('main.home')}}">Tommaso Perondi</a></p>
             </div>
             <!--NAVBAR-->
             <div id="navbar">
-                <div class="nav-inner"><button class='nav-btn' onclick="location.href ='{{ url_for('main.home')}}';">Home</button></div>
                 <div class="nav-inner"><button class='nav-btn' onclick="location.href ='{{ url_for('main.blog')}}';">Blog</button></div>
                 <div class="nav-inner"><button class='nav-btn' onclick="location.href ='{{ url_for('main.about')}}';">About</button></div>
                 {% if current_user.is_authenticated %}
