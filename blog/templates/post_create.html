@@ -4,7 +4,9 @@
     <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@editorjs/editorjs@latest"></script>
     <script src="https://cdn.jsdelivr.net/npm/@editorjs/code@latest"></script>
-    <script src="{{ url_for('main.static', filename='js/edjsHTML.js') }}"></script>
+    <script src="{{ url_for('main.static', filename='packages/codemirror/lib/codemirror.js') }}"></script>
+    <link rel="stylesheet" href="{{ url_for('main.static', filename='packages/codemirror/lib/codemirror.css') }}">
+    <script src="{{ url_for('main.static', filename='packages/codemirror/mode/javascript/javascript.js') }}"></script>
 {%endblock%}
 
 {% block content %}
@@ -35,11 +37,8 @@
           </fieldset>
     
           <fieldset class="content">
-            {{ form.content.label }}
-            {{ form.content(style="display:none")}}
-            <div id="editorjs">
-
-            </div>
+            {{ form.content.label }}          
+            {{ form.content(id="content_field")}}
             {% if form.content.errors %}
               <ul class="errors">
                 {% for error in form.content.errors %}
@@ -52,28 +51,14 @@
             {{ form.submit }}
           </div>
         </form>
-
       </div>
-
       <script>
+        var myCodeMirror = CodeMirror.fromTextArea(document.getElementById('content_field'), {
+  mode: "javascript",
+  autoRefresh:true,
+  lineNumbers: false,
+  lineWrapping: true,
+        });
+      </script>
 
-        const editor = new EditorJS({ 
-          holder: 'editorjs', 
-          tools: { 
-            code: CodeTool,
-          }, 
-        })
-
-        const edjsParser = edjsHTML();
-
-        function saveEditorData(){
-          editor.save().then((outputData) => {
-            let html = edjsParser.parse(outputData).join(" ");
-            content.value = html
-          }).catch((error) => {
-            console.log('Saving failed: ', error)
-          });
-        }
-
-      </script> 
 {% endblock %}

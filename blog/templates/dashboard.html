@@ -13,7 +13,9 @@
         <div class='post-date'> {{ post['created_on'] }}</div>
         <div class='post-content'>{{ post['content']|safe }}</div>
         <div class='post-author'>{{ post['name'] }}</div>
-        <a href="/posts/{{ post['id'] }}/edit">Edit</a>
+        <a href="/posts/{{ post['id'] }}/edit">
+            <button class="nav-btn" action="submit" href="/posts/{{ post['id'] }}/edit">Edit</button>
+        </a>
         <button class="nav-btn" action="submit" id="delete_button{{ post['id']}}">Delete</button>
             <script>
                 $("#delete_button{{ post['id']}}").on('click', function(){
