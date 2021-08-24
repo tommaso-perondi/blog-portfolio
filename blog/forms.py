@@ -7,3 +7,8 @@ class PostCreate(FlaskForm):
     title = StringField('Post title', validators=[DataRequired(), ])
     content = TextAreaField('Post content')
     submit = SubmitField('Create post')
+
+class PostEdit(FlaskForm):
+    title = StringField('Post title', validators=[DataRequired(), ])
+    content = TextAreaField('Post content')
+    submit = SubmitField('Edit post')

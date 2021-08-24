@@ -2,7 +2,7 @@ from flask import Blueprint, render_template, redirect, url_for, Response, reque
 from flask_login import current_user, login_required, logout_user
 import json
 from blog.models import Post
-from blog.forms import PostCreate
+from blog.forms import PostCreate, PostEdit
 from blog import db
 
 main = Blueprint(
@@ -33,6 +33,26 @@ def create_post():
         form=form,
         title="Create post.",
     )
+
+@main.route("/posts/<post_id>/edit", methods=["GET", "POST"])
+@login_required
+def edit_post(post_id):
+
+    post=Post.query.filter_by(
+            id=post_id).first_or_404()
+    form = PostEdit(obj=post)
+    user = current_user
+    if form.validate_on_submit():
+        db.session.query(Post).filter_by(id=post_id).update({"title" : form.title.data, "content" : form.content.data, "author_id" : user.id})
+        db.session.commit()
+        return redirect(url_for('main.blog'))
+
+    return render_template(
+        "post_edit.html",
+        form=form,
+        title="Edit post.",
+    )
+
 
 
 @main.route("/posts/<post_id>/delete")
