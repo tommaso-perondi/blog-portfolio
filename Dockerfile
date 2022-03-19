@@ -11,4 +11,3 @@ EXPOSE 9090
 #ENTRYPOINT ["/entrypoint.sh"]
 
 CMD ["uwsgi", "--ini", "/app/app.ini"]
-CMD tail -f /dev/null
