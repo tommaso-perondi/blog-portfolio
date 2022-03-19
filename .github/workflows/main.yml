@@ -11,11 +11,9 @@ on:
     branches: [ master ]
 
   # Allows you to run this workflow manually from the Actions tab
-  workflow_dispatch:
-
-runs:
-  using: 'docker'
-  image: 'Dockerfile'
-  ports:
-  # Opens tcp port 6379 on the host and service container
-  - 9090:9090
+  jobs:
+  deploy:
+      runs-on: ubuntu-latest
+      steps:
+        - name: Deploy to VPS
+          run: docker build -t app . && docker run -p 9090:9090 app 
