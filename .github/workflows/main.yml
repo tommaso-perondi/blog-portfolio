@@ -18,4 +18,4 @@ jobs:
         - name: Check out code
           uses: actions/checkout@v2
         - name: Deploy to VPS
-          run: cd ${{ github.workspace }} && ls && docker build -t app . && docker run -d -p 9090:9090 app 
+          run: docker-compose up 
