@@ -16,5 +16,4 @@ jobs:
       runs-on: ubuntu-latest
       steps:
         - name: Deploy to VPS
-          run: cd ${{ github.workspace }}
-          run: pwd && ls && docker build -t app . && docker run -p 9090:9090 app 
+          run: cd ${{ github.workspace }} && ls && docker build -t app . && docker run -p 9090:9090 app 
