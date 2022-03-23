@@ -18,4 +18,4 @@ jobs:
         - name: Check out code
           uses: actions/checkout@v2
         - name: Deploy to VPS
-          run: docker-compose stop && docker-compose up --no-start && docker-compose start
+          run: sudo docker-compose up
